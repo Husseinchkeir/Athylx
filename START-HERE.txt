@@ -1,0 +1,10 @@
+SPORTS HUB WEB2 — .js + React Router
+
+Open this folder in VS Code.
+Run in the terminal:
+  npm.cmd install
+  npm.cmd run dev
+
+Pages: Home /, About /about, Sports Menu /menu, Contact /contact
+Favorite sport shared between Home and Menu, saved on refresh.
+See README.md for changes and testing.

@@ -1,0 +1,349 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Playfair Display', Georgia, serif;
+  background: #f4f7fb;
+  color: #1a1a1a;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.page {
+  width: min(1100px, 92%);
+  margin: 26px auto;
+}
+
+.hero-panel,
+.section-card {
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 22px;
+  box-shadow: 0 8px 24px rgba(20, 48, 70, 0.08);
+}
+
+.hero-panel {
+  text-align: center;
+  background: linear-gradient(135deg, #1a3a52, #1a4d2e);
+  color: #ffffff;
+  padding: 46px 28px;
+}
+
+.small-hero {
+  padding: 34px 24px;
+}
+
+.eyebrow {
+  color: #ffd9b0;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 14px;
+  margin: 0 0 8px;
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 0;
+}
+
+h1 {
+  font-size: clamp(34px, 6vw, 54px);
+  margin-bottom: 12px;
+}
+
+h2 {
+  color: #1a3a52;
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.hero-panel h2,
+.hero-panel h3,
+.hero-panel p {
+  color: inherit;
+}
+
+.hero-panel p {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+.hero-actions,
+.control-row,
+.toolbar,
+.radio-line {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn,
+.btn-secondary {
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.btn {
+  background: #cc5500;
+  color: #ffffff;
+}
+
+.btn:hover,
+.btn-secondary:hover {
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: #ffffff;
+  color: #1a3a52;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.card {
+  background: #f0f5f0;
+  border: 1px solid #d4e8d4;
+  border-radius: 14px;
+  padding: 20px;
+  min-height: 170px;
+  text-align: center;
+  transition: 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card h3 {
+  color: #1a4d2e;
+}
+
+.muted {
+  color: #4a4a4a;
+  font-size: 15px;
+}
+
+.info-box {
+  background: #fff5e6;
+  border-left: 6px solid #cc5500;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 8px;
+}
+
+.list-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.clean-list {
+  background: #f8fbff;
+  border: 1px solid #dce7f4;
+  border-radius: 12px;
+  padding: 20px 26px;
+}
+
+.clean-list li {
+  margin: 10px 0;
+}
+
+select,
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #aaaaaa;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.control-row select,
+.toolbar select,
+.toolbar input {
+  max-width: 260px;
+}
+
+.result-pill,
+.notice,
+.form-notice {
+  display: inline-block;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #fff5e6;
+  border: 1px solid #ffd6a3;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  background: #ffffff;
+  min-width: 680px;
+}
+
+caption {
+  caption-side: top;
+  font-weight: 700;
+  padding: 10px;
+  color: #1a3a52;
+}
+
+th,
+td {
+  border: 1px solid #999999;
+  padding: 12px;
+  text-align: center;
+}
+
+th {
+  background: #1a4d2e;
+  color: #ffffff;
+}
+
+tr:nth-child(even) {
+  background: #f1f1f1;
+}
+
+form {
+  max-width: 670px;
+  margin: 0 auto;
+}
+
+label {
+  font-weight: 700;
+  display: block;
+  margin-top: 13px;
+}
+
+.radio-line {
+  justify-content: flex-start;
+  margin-top: 8px;
+}
+
+.radio-line label {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  margin: 0 16px 0 0;
+}
+
+.radio-line input {
+  width: auto;
+}
+
+.form-notice {
+  display: block;
+  max-width: 670px;
+  margin: 18px auto 0;
+}
+
+.form-notice.success {
+  background: #e8f7ed;
+  border-color: #91d1a5;
+}
+
+.form-notice.error {
+  background: #fff0f0;
+  border-color: #e5aaaa;
+}
+
+.contact-info {
+  text-align: center;
+}
+
+a {
+  color: #cc5500;
+  font-weight: 700;
+}
+
+@media (max-width: 820px) {
+  .grid,
+  .list-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-panel,
+  .section-card {
+    padding: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    width: 95%;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  .hero-actions .btn,
+  .hero-actions .btn-secondary,
+  .control-row select,
+  .toolbar select,
+  .toolbar input {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* A small status line above the schedule filters. */
+.schedule-filter-status {
+  text-align: center;
+  margin: 0 0 12px;
+  color: #1a3a52;
+}
+.schedule-btn {
+  display: inline-block;
+  padding: 9px 14px;
+  background-color: #2563eb;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 8px;
+  transition: background-color 0.2s;
+}
+
+.schedule-btn:hover {
+  background-color: #1d4ed8;
+  color: white;
+}
