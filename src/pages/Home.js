@@ -1,21 +1,37 @@
 
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import SportContext from '../context/SportContext.js';
 import AuthPanel from '../components/AuthPanel.js';
 
+import '../styles/HomeHighlights.css';
+
+// REAL SPORTS PHOTOGRAPHS
 const highlights = [
   {
     title: 'Football',
-    text: 'Follow club matches, important results and upcoming games.'
+    icon: '⚽',
+    label: 'THE BEAUTIFUL GAME',
+    text: 'Follow club matches, discover teams and explore upcoming football fixtures.',
+    image:
+      'https://images.unsplash.com/photo-1769859177914-f66488d71193?auto=format&fit=crop&w=1000&q=85'
   },
   {
     title: 'Basketball',
-    text: 'Check team news and the main games of the week.'
+    icon: '🏀',
+    label: 'BEYOND THE COURT',
+    text: 'Explore professional basketball, team matchups and upcoming NBA games.',
+    image:
+      'https://images.unsplash.com/photo-1541915803885-12f5c95b1669?auto=format&fit=crop&w=1000&q=85'
   },
   {
     title: 'Tennis',
-    text: 'Read about players, tournaments and match updates.'
+    icon: '🎾',
+    label: 'EVERY POINT MATTERS',
+    text: 'Discover tennis tournaments, professional players and upcoming matches.',
+    image:
+      'https://images.unsplash.com/photo-1568663469495-b09d5e3c2e07?auto=format&fit=crop&w=1000&q=85'
   }
 ];
 
@@ -23,6 +39,7 @@ const sports = ['Football', 'Basketball', 'Tennis'];
 
 const Home = () => {
 
+  // SHARED CONTEXT
   const {
     favorite,
     setFavorite,
@@ -32,9 +49,17 @@ const Home = () => {
 
   const navigate = useNavigate();
 
+  // FAVORITE SPORT ICON
   const sportIcon =
     favorite === 'Football' ? '⚽' :
     favorite === 'Basketball' ? '🏀' : '🎾';
+
+  // Open the schedule with a temporary sport filter.
+  const handleExplore = (sport) => {
+    navigate('/menu', {
+      state: { sportFilter: sport }
+    });
+  };
 
   return (
     <main className="page">
@@ -45,7 +70,7 @@ const Home = () => {
         <div className="home-hero-copy">
 
           <p className="eyebrow">
-            WELCOME TO SPORTS HUB
+            WELCOME TO ATHLYX
           </p>
 
           {demoUser && (
@@ -75,7 +100,7 @@ const Home = () => {
               type="button"
               onClick={() => navigate('/about')}
             >
-              Discover Sports Hub
+              Discover ATHLYX
             </button>
 
           </div>
@@ -101,7 +126,6 @@ const Home = () => {
           </div>
 
           <div className="home-showcase-feature">
-
             <span>YOUR FAVORITE SPORT</span>
 
             <h2>{favorite}</h2>
@@ -109,7 +133,6 @@ const Home = () => {
             <p>
               Explore your sport's upcoming fixtures.
             </p>
-
           </div>
 
           <div className="home-showcase-tags">
@@ -133,28 +156,102 @@ const Home = () => {
 
       </section>
 
-      {/* SPORTS HIGHLIGHTS */}
-      <section className="section-card">
+      {/* NEW CINEMATIC SPORTS HIGHLIGHTS */}
+      <section className="section-card highlights-section">
 
-        <h2>Latest Highlights</h2>
+        <div className="highlights-heading">
+          <div>
+            <h2>Latest Highlights</h2>
 
-        <div className="grid">
+            <p className="highlights-subtitle">
+              Three sports. One destination.
+              Explore what moves you.
+            </p>
+          </div>
+
+          <span className="highlights-heading-tag">
+            EXPLORE ATHLYX
+          </span>
+        </div>
+
+        <div className="grid highlights-grid">
 
           {highlights.map((item) => (
-            <article className="card" key={item.title}>
 
-              <h3>{item.title}</h3>
+            <article
+              className={
+                `card highlight-card highlight-card--${item.title.toLowerCase()}`
+              }
+              key={item.title}
+            >
 
-              <p>{item.text}</p>
+              {/* REAL SPORTS BACKGROUND */}
+              <div className="highlight-card__image-wrap">
+                <img
+                  className="highlight-card__image"
+                  src={item.image}
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+
+              {/* DARK GRADIENT OVERLAY */}
+              <div className="highlight-card__overlay"></div>
+
+              {/* CARD CONTENT */}
+              <div className="highlight-card__content">
+
+                <div className="highlight-card__top">
+
+                  <span className="highlight-card__icon">
+                    {item.icon}
+                  </span>
+
+                  <span className="highlight-card__number">
+                    0{highlights.indexOf(item) + 1}
+                  </span>
+
+                </div>
+
+                <div className="highlight-card__bottom">
+
+                  <span className="highlight-card__label">
+                    {item.label}
+                  </span>
+
+                  <h3>{item.title}</h3>
+
+                  <p>{item.text}</p>
+
+                  {/* WORKING EXPLORE BUTTON */}
+                  <button
+                    type="button"
+                    className="highlight-card__action"
+                    onClick={() => handleExplore(item.title)}
+                  >
+                    Explore {item.title}
+
+                    <span
+                      className="highlight-card__arrow"
+                      aria-hidden="true"
+                    >
+                      →
+                    </span>
+                  </button>
+
+                </div>
+
+              </div>
 
             </article>
+
           ))}
 
         </div>
 
       </section>
 
-      {/* AUTHENTICATION DEMO - HOME ONLY */}
+      {/* SIGN IN / SIGN UP */}
       <AuthPanel
         demoUser={demoUser}
         favorite={favorite}

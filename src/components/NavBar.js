@@ -1,7 +1,6 @@
 
 import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import logo from '../assets/logo.png';
 import '../styles/NavBar.css';
 
 const navItems = [
@@ -27,8 +26,8 @@ const NavBar = () => {
           to="/"
           onClick={() => setOpen(false)}
         >
-          <img src={logo} alt="Sports Hub logo" />
-          <span>Sports Hub</span>
+          <img src="/athlyx-icon.png" alt="ATHLYX logo" />
+          <span>ATHLYX</span>
         </Link>
 
         {/* MOBILE MENU BUTTON */}

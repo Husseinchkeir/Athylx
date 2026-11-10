@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import SportDropdown from '../components/SportDropdown.js';
 
 const initialForm = {
   fullname: '',
@@ -8,13 +9,17 @@ const initialForm = {
   message: ''
 };
 
-function Contact() {
+const Contact = () => {
   const [form, setForm] = useState(initialForm);
   const [notice, setNotice] = useState(null);
 
   const updateField = (event) => {
     const { name, value } = event.target;
     setForm((current) => ({ ...current, [name]: value }));
+  };
+
+  const updateSport = (sport) => {
+    setForm((current) => ({ ...current, sport }));
   };
 
   const handleSubmit = (event) => {
@@ -25,7 +30,7 @@ function Contact() {
       return;
     }
 
-    setNotice({ type: 'success', text: `Thank you, ${form.fullname}. Your Sports Hub feedback was saved on this page.` });
+    setNotice({ type: 'success', text: `Thank you, ${form.fullname}. Your ATHLYX feedback was saved on this page.` });
     setForm(initialForm);
   };
 
@@ -62,13 +67,13 @@ function Contact() {
             onChange={updateField}
           />
 
-          <label htmlFor="sport">Favorite Sport</label>
-          <select id="sport" name="sport" value={form.sport} onChange={updateField}>
-            <option>Football</option>
-            <option>Basketball</option>
-            <option>Tennis</option>
-            <option>Other</option>
-          </select>
+          <label>Favorite Sport</label>
+          <SportDropdown
+            value={form.sport}
+            onChange={updateSport}
+            includeOther={true}
+            ariaLabel="Favorite Sport"
+          />
 
           <label>Do you follow sports daily?</label>
           <div className="radio-line">
@@ -118,6 +123,6 @@ function Contact() {
       </section>
     </main>
   );
-}
+};
 
 export default Contact;

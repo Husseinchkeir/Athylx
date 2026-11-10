@@ -1,5 +1,6 @@
 
 import { useState, useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import SportContext from '../context/SportContext.js';
 import SportDropdown from '../components/SportDropdown.js';
 
@@ -9,24 +10,99 @@ const sports = [
     name: 'Football',
     description:
       'Follow European football, major club competitions and upcoming fixtures.',
-    team:
-      'Real Madrid, Arsenal, Manchester City, Liverpool, Bayern Munich'
+    featuredTeams: [
+      {
+        name: 'Arsenal',
+        logo: 'https://a.espncdn.com/i/teamlogos/soccer/500/359.png'
+      },
+      {
+        name: 'Real Madrid',
+        logo: 'https://a.espncdn.com/i/teamlogos/soccer/500/86.png'
+      },
+      {
+        name: 'Liverpool',
+        logo: 'https://a.espncdn.com/i/teamlogos/soccer/500/364.png'
+      }
+    ]
   },
   {
     name: 'Basketball',
     description:
       'Explore NBA teams, professional basketball and regular-season games.',
-    team:
-      'Golden State Warriors, Cleveland Cavaliers, New York Knicks, Houston Rockets'
+    featuredTeams: [
+      {
+        name: 'Cleveland Cavaliers',
+        logo: 'https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/cle.png'
+      },
+      {
+        name: 'New York Knicks',
+        logo: 'https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/ny.png'
+      },
+      {
+        name: 'Golden State Warriors',
+        logo: 'https://a.espncdn.com/i/teamlogos/nba/500/scoreboard/gs.png'
+      }
+    ]
   },
   {
     name: 'Tennis',
     description:
       'Follow professional tennis players, ATP tournaments and international matches.',
-    team:
-      'Carlos Alcaraz, Alexander Zverev, Holger Rune, Lorenzo Musetti'
+    featuredTeams: [
+      {
+        name: 'Carlos Alcaraz',
+        logo: 'https://a.espncdn.com/i/headshots/tennis/players/full/3782.png'
+      },
+      {
+        name: 'Jannik Sinner',
+        logo: 'https://a.espncdn.com/i/headshots/tennis/players/full/3623.png'
+      },
+      {
+        name: 'Alexander Zverev',
+        logo: 'https://a.espncdn.com/i/headshots/tennis/players/full/2375.png'
+      }
+    ]
   }
 ];
+
+const validSports = ['All', 'Football', 'Basketball', 'Tennis'];
+
+const sportIcons = {
+  Football: '⚽',
+  Basketball: '🏀',
+  Tennis: '🎾'
+};
+
+const getTeamInitials = (name) =>
+  name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join('')
+    .toUpperCase();
+
+const TeamLogo = ({ team, sport }) => {
+  const [failed, setFailed] = useState(false);
+
+  if (!team.logo || failed) {
+    return (
+      <span className={`explore-team__logo explore-team__logo--${sport.toLowerCase()}`} aria-hidden="true">
+        {getTeamInitials(team.name)}
+      </span>
+    );
+  }
+
+  return (
+    <img
+      className="explore-team__logo"
+      src={team.logo}
+      alt=""
+      loading="lazy"
+      onError={() => setFailed(true)}
+    />
+  );
+};
 
 // STATIC EXAMPLE MATCHES
 // These are sample entries, not verified live fixtures.
@@ -37,7 +113,6 @@ const matches = [
     date: '10 Nov 2026',
     time: '2:00 PM',
     tournament: 'Stockholm Open',
-    status: 'Example',
     source: 'https://www.stockholmopen.se/'
   },
   {
@@ -46,7 +121,6 @@ const matches = [
     date: '10 Nov 2026',
     time: '7:00 PM',
     tournament: 'Stockholm Open',
-    status: 'Example',
     source: 'https://www.stockholmopen.se/'
   },
   {
@@ -55,7 +129,6 @@ const matches = [
     date: '12 Nov 2026',
     time: '2:00 AM',
     tournament: 'NBA Regular Season',
-    status: 'Example',
     source: 'https://www.nba.com/schedule'
   },
   {
@@ -64,7 +137,6 @@ const matches = [
     date: '12 Nov 2026',
     time: '4:30 AM',
     tournament: 'NBA Regular Season',
-    status: 'Example',
     source: 'https://www.nba.com/schedule'
   },
   {
@@ -73,7 +145,6 @@ const matches = [
     date: '19 Nov 2026',
     time: '2:00 AM',
     tournament: 'NBA Regular Season',
-    status: 'Example',
     source: 'https://www.nba.com/schedule'
   },
   {
@@ -82,7 +153,6 @@ const matches = [
     date: '24 Nov 2026',
     time: '10:00 PM',
     tournament: 'UEFA Champions League',
-    status: 'Example',
     source:
       'https://www.uefa.com/uefachampionsleague/fixtures-results/'
   },
@@ -92,7 +162,6 @@ const matches = [
     date: '24 Nov 2026',
     time: '10:00 PM',
     tournament: 'UEFA Champions League',
-    status: 'Example',
     source:
       'https://www.uefa.com/uefachampionsleague/fixtures-results/'
   },
@@ -102,7 +171,6 @@ const matches = [
     date: '24 Nov 2026',
     time: '10:00 PM',
     tournament: 'UEFA Champions League',
-    status: 'Example',
     source:
       'https://www.uefa.com/uefachampionsleague/fixtures-results/'
   },
@@ -112,7 +180,6 @@ const matches = [
     date: '25 Nov 2026',
     time: '10:00 PM',
     tournament: 'UEFA Champions League',
-    status: 'Example',
     source:
       'https://www.uefa.com/uefachampionsleague/fixtures-results/'
   }
@@ -123,6 +190,11 @@ const Menu = () => {
 
   // SHARED CONTEXT
   const { favorite, demoUser } = useContext(SportContext);
+  const location = useLocation();
+  const requestedSport = location.state?.sportFilter;
+  const initialSportFilter = validSports.includes(requestedSport)
+    ? requestedSport
+    : favorite || 'All';
 
   // SIGN IN STATUS
   const signedIn = Boolean(demoUser && demoUser.email);
@@ -133,9 +205,7 @@ const Menu = () => {
     : null;
 
   // SPORT FILTER
-  const [sportFilter, setSportFilter] = useState(
-    favorite || 'All'
-  );
+  const [sportFilter, setSportFilter] = useState(initialSportFilter);
 
   // SEARCH
   const [search, setSearch] = useState('');
@@ -181,10 +251,16 @@ const Menu = () => {
 
   }, [savedMatches, storageKey]);
 
-  // UPDATE FILTER WHEN FAVORITE CHANGES
+  // Apply Explore filters when navigating to another Menu history entry.
   useEffect(() => {
-    setSportFilter(favorite || 'All');
-  }, [favorite]);
+    const requested = location.state?.sportFilter;
+
+    setSportFilter(
+      validSports.includes(requested)
+        ? requested
+        : favorite || 'All'
+    );
+  }, [favorite, location.key, location.state?.sportFilter]);
 
   // SAVE OR REMOVE MATCH
   const toggleSaved = (matchName) => {
@@ -203,6 +279,15 @@ const Menu = () => {
 
       return [...current, matchName];
 
+    });
+  };
+
+  const showSportMatches = (sport, teamName = '') => {
+    setSportFilter(sport);
+    setSearch(teamName);
+    document.getElementById('match-schedule')?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
     });
   };
 
@@ -229,7 +314,7 @@ const Menu = () => {
       {/* MENU HERO */}
       <section className="hero-panel small-hero">
 
-        <p className="eyebrow">SPORTS HUB</p>
+        <p className="eyebrow">ATHLYX</p>
 
         <h1>Sports, Teams & Schedules.</h1>
 
@@ -242,7 +327,7 @@ const Menu = () => {
 
           <p>
             Welcome, <strong>{demoUser.name}</strong>!
-            Your saved matches belong to your demo profile.
+            Your saved matches belong to your profile.
           </p>
 
         ) : (
@@ -270,20 +355,44 @@ const Menu = () => {
 
           {sports.map((sport) => (
 
-            <article
-              className="card"
+              <article
+                className={`card explore-sport-card explore-sport-card--${sport.name.toLowerCase()}`}
               key={sport.name}
             >
-              <h3>{sport.name}</h3>
+                <div className="explore-sport-card__heading">
+                  <span aria-hidden="true">{sportIcons[sport.name]}</span>
+                  <h3>{sport.name}</h3>
+                </div>
 
-              <p>{sport.description}</p>
+                <p>{sport.description}</p>
 
-              <p className="muted">
-                <strong>Featured clubs / players: </strong>
-                {sport.team}
-              </p>
+                <div className="explore-sport-card__featured">
+                  <p className="explore-sport-card__label">
+                    Featured {sport.name === 'Tennis' ? 'players' : 'teams'}
+                  </p>
+                  <div className="explore-sport-card__teams">
+                    {sport.featuredTeams.map((team) => (
+                      <button
+                        className="explore-team"
+                        key={team.name}
+                        type="button"
+                        onClick={() =>
+                          showSportMatches(
+                            sport.name,
+                            sport.name === 'Tennis' ? '' : team.name
+                          )
+                        }
+                        aria-label={`Show ${sport.name} matches featuring ${team.name}`}
+                      >
+                        <TeamLogo team={team} sport={sport.name} />
+                        <span>{team.name}</span>
+                        <span className="explore-team__arrow" aria-hidden="true">→</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
 
-            </article>
+              </article>
 
           ))}
 
@@ -292,7 +401,7 @@ const Menu = () => {
       </section>
 
       {/* MATCH SCHEDULE */}
-      <section className="section-card">
+      <section className="section-card" id="match-schedule">
 
         <h2>Sports Match Schedule</h2>
 
@@ -348,7 +457,7 @@ const Menu = () => {
 
           <table>
 
-            <caption>Sports Hub Match Schedule</caption>
+            <caption>ATHLYX Match Schedule</caption>
 
             <thead>
               <tr>
@@ -357,7 +466,6 @@ const Menu = () => {
                 <th>Competition</th>
                 <th>Date</th>
                 <th>Time</th>
-                <th>Status</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -368,17 +476,51 @@ const Menu = () => {
 
                 <tr key={`${item.sport}-${item.match}`}>
 
-                  <td>{item.sport}</td>
+                  <td>
+                    <span className="match-sport">
+                      <span aria-hidden="true">{sportIcons[item.sport]}</span>
+                      {item.sport}
+                    </span>
+                  </td>
 
-                  <td>{item.match}</td>
+                  <td>
+                    <span className="match-versus">
+                      {item.match.split(' vs ').map((team, index) => (
+                        <span className="match-versus__team" key={team}>
+                          {index > 0 && (
+                            <span
+                              className="match-versus__separator"
+                              aria-hidden="true"
+                            >
+                              VS
+                            </span>
+                          )}
+                          {team}
+                        </span>
+                      ))}
+                    </span>
+                  </td>
 
-                  <td>{item.tournament}</td>
+                  <td>
+                    <span className="match-detail">
+                      <span aria-hidden="true">🏆</span>
+                      {item.tournament}
+                    </span>
+                  </td>
 
-                  <td>{item.date}</td>
+                  <td>
+                    <span className="match-detail">
+                      <span aria-hidden="true">📅</span>
+                      {item.date}
+                    </span>
+                  </td>
 
-                  <td>{item.time}</td>
-
-                  <td>{item.status}</td>
+                  <td>
+                    <span className="match-detail">
+                      <span aria-hidden="true">🕒</span>
+                      {item.time}
+                    </span>
+                  </td>
 
                   <td>
 
@@ -390,6 +532,9 @@ const Menu = () => {
                         toggleSaved(item.match)
                       }
                     >
+                      <span aria-hidden="true">
+                        {savedMatches.includes(item.match) ? '✓' : '＋'}
+                      </span>
                       {!signedIn
                         ? 'Sign in to save'
                         : savedMatches.includes(item.match)
@@ -406,6 +551,7 @@ const Menu = () => {
                       rel="noopener noreferrer"
                       className="schedule-btn"
                     >
+                      <span aria-hidden="true">↗</span>
                       Official Schedule
                     </a>
 

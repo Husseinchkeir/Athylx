@@ -1,0 +1,364 @@
+
+/* ============================================
+   ATHLYX — CINEMATIC SPORTS HIGHLIGHTS
+   DARK THEME + REAL PHOTOGRAPHY
+   ============================================ */
+
+/* SECTION */
+
+.highlights-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.highlights-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.highlights-heading h2 {
+  margin-bottom: 12px;
+}
+
+.highlights-subtitle {
+  color: #a9bac6;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.highlights-heading-tag {
+  padding: 10px 15px;
+  border: 1px solid rgba(199, 250, 112, 0.3);
+  border-radius: 30px;
+
+  color: #c7fa70;
+  background: rgba(199, 250, 112, 0.06);
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+}
+
+/* CARD GRID */
+
+.highlights-section .highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* PHOTO CARD */
+
+.highlights-section .highlights-grid .highlight-card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+
+  min-height: 350px;
+  padding: 0;
+
+  overflow: hidden;
+  border-radius: 20px;
+
+  background: #102331;
+  border: 1px solid rgba(148, 178, 189, 0.25);
+
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.17);
+
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+/* IMAGE CONTAINER */
+
+.highlight-card__image-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* REAL PHOTOGRAPHY */
+
+.highlight-card__image {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  filter: brightness(0.75) saturate(0.85);
+
+  transition:
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    filter 0.5s ease;
+}
+
+/* DARK OVERLAY */
+
+.highlight-card__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    180deg,
+    rgba(4, 12, 20, 0.20) 0%,
+    rgba(5, 15, 24, 0.40) 35%,
+    rgba(5, 13, 22, 0.88) 75%,
+    rgba(5, 13, 22, 0.98) 100%
+  );
+}
+
+/* SUBTLE INDIVIDUAL SPORT COLORS */
+
+.highlight-card--football {
+  --card-accent: #c7fa70;
+}
+
+.highlight-card--basketball {
+  --card-accent: #ffb071;
+}
+
+.highlight-card--tennis {
+  --card-accent: #9ee8ef;
+}
+
+/* CONTENT */
+
+.highlight-card__content {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  flex: 1;
+  min-width: 0;
+  padding: 24px;
+}
+
+/* TOP ICON AND NUMBER */
+
+.highlight-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.highlight-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+
+  border-radius: 14px;
+
+  font-size: 24px;
+
+  background: rgba(7, 20, 29, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+
+  backdrop-filter: blur(8px);
+}
+
+.highlight-card__number {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+/* BOTTOM DETAILS */
+
+.highlight-card__bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.highlight-card__label {
+  color: var(--card-accent);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  margin-bottom: 10px;
+}
+
+.highlights-section .highlight-card h3 {
+  color: #ffffff;
+
+  font-size: clamp(25px, 2.5vw, 34px);
+  line-height: 1.15;
+  letter-spacing: -0.8px;
+
+  margin: 0 0 12px;
+  padding: 0;
+
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+}
+
+.highlights-section .highlight-card p {
+  color: #d4dce3;
+
+  font-size: 13px;
+  line-height: 1.7;
+
+  margin: 0 0 22px;
+
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+/* EXPLORE BUTTON */
+
+.highlight-card__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  min-width: 165px;
+  padding: 12px 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+
+  background: rgba(10, 25, 33, 0.80);
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+
+  backdrop-filter: blur(8px);
+
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.highlight-card__arrow {
+  color: var(--card-accent);
+  font-size: 18px;
+
+  transition: transform 0.25s ease;
+}
+
+.highlight-card__action:hover {
+  background: var(--card-accent);
+  border-color: var(--card-accent);
+  color: #0a191b;
+}
+
+.highlight-card__action:hover .highlight-card__arrow {
+  color: #0a191b;
+  transform: translateX(4px);
+}
+
+/* HOVER: PHOTO ZOOM + SOFT GLOW */
+
+.highlights-section .highlights-grid .highlight-card:hover {
+  transform: translateY(-7px);
+
+  border-color: var(--card-accent);
+
+  box-shadow:
+    0 22px 45px rgba(0, 0, 0, 0.35),
+    0 0 24px rgba(199, 250, 112, 0.08);
+}
+
+.highlight-card:hover .highlight-card__image {
+  transform: scale(1.1);
+  filter: brightness(0.9) saturate(1.05);
+}
+
+.highlight-card:hover .highlight-card__action {
+  border-color: var(--card-accent);
+}
+
+/* ACCESSIBLE KEYBOARD FOCUS */
+
+.highlight-card__action:focus-visible {
+  outline: 3px solid var(--card-accent);
+  outline-offset: 4px;
+}
+
+/* ============================================
+   TABLET RESPONSIVE
+   ============================================ */
+
+@media (max-width: 900px) {
+  .highlights-section .highlights-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .highlights-section .highlights-grid .highlight-card {
+    min-height: 330px;
+  }
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+
+@media (max-width: 600px) {
+  .highlights-section .highlights-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .highlights-section .highlights-grid .highlight-card {
+    min-height: 320px;
+  }
+
+  .highlight-card__content {
+    padding: 22px;
+  }
+
+  .highlights-heading-tag {
+    display: none;
+  }
+
+  .highlights-section .highlight-card h3 {
+    font-size: 30px;
+  }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+  .highlight-card,
+  .highlight-card__image,
+  .highlight-card__action,
+  .highlight-card__arrow {
+    transition: none !important;
+  }
+
+  .highlights-section .highlights-grid .highlight-card:hover {
+    transform: none;
+  }
+
+  .highlight-card:hover .highlight-card__image {
+    transform: none;
+  }
+}

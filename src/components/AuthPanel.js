@@ -145,12 +145,12 @@ const AuthPanel = ({
 
       <div className="auth-intro">
 
-        <p className="eyebrow">JOIN SPORTS HUB</p>
+        <p className="eyebrow">JOIN ATHLYX</p>
 
         <h2>Your Sports. Your Space.</h2>
 
         <p>
-          Create your Sports Hub demo profile,
+          Create your ATHLYX  profile,
           discover sports schedules and save
           your favorite matches.
         </p>
@@ -171,7 +171,7 @@ const AuthPanel = ({
           <div className="auth-welcome">
 
             <p className="eyebrow">
-              DEMO PROFILE ACTIVE
+               PROFILE ACTIVE
             </p>
 
             <h3>
@@ -237,7 +237,7 @@ const AuthPanel = ({
             <h3>
               {mode === 'signin'
                 ? 'Welcome Back'
-                : 'Create Your Demo Profile'}
+                : 'Create Your Profile'}
             </h3>
 
             <form onSubmit={handleSubmit}>

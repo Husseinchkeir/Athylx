@@ -1,53 +1,106 @@
-# Sports Hub — Web2 (.js files + React Router)
+# ATHLYX — Closer to the Game
 
-This is the original Sports Hub design updated for Web2. It keeps the existing CSS,
-logo, Home, About, Sports Menu, and Contact pages while converting all React
-components from `.jsx` to `.js` and adding **React Router**.
+ATHLYX is a ReactJS sports hub for exploring football, basketball and tennis
+schedules, filtering matches, and saving personal match lists in a demo profile.
+The project retains its dark navy theme, neon-green accents and four-page layout.
 
-## Run it on Windows
+## Features
 
-1. Extract this ZIP into its own folder.
-2. Open that folder in VS Code. Open a terminal **inside the folder containing `package.json`**.
-3. Run:
+- Four React Router pages: Home, About, Sports Menu and Contact.
+- Separate persistent favorite sport selection and temporary match filters.
+- Match schedule filtering by sport and search by team/player or tournament.
+- Frontend demo registration/sign-in, active profile and sign-out.
+- Per-profile saved matches persisted in browser local storage.
+- Responsive navigation, schedule tables, sports cards and image highlights.
 
-   ```powershell
-   npm.cmd install
-   npm.cmd run dev
-   ```
+> **Authentication limitation:** sign-in is a frontend demonstration, not secure
+> password authentication. Registration stores profile details only; passwords
+> are neither verified nor saved. Do not enter a real password.
+>
+> **Schedule limitation:** the displayed schedule entries are static examples,
+> not live or verified fixtures. Contact form submissions are also kept only in
+> the current page session.
 
-4. Open the local URL printed by Vite (normally http://127.0.0.1:5173/).
+## Technology
 
-`npm.cmd` avoids the PowerShell execution-policy problem that sometimes blocks `npm`.
-You will need an internet connection for the first `npm.cmd install` because
-`react-router-dom` has been added. Do not open `index.html` directly in a browser.
+- React 18 and React DOM
+- React Router 6
+- JavaScript (`.js`) with JSX transformed by Babel
+- Webpack 5 with Babel, CSS and asset loaders
+- Browser local storage for the existing demo profile and saved-match data
 
-## Features / what was changed
+## Requirements
 
-- **Routing:** `BrowserRouter` in `src/main.js`, `<Routes>` and `<Route>` in `src/App.js`, `NavLink` in `src/components/NavBar.js`, `useNavigate` in `src/pages/Home.js`.
-- **Pages / URLs:** `/` (Home), `/about` (About), `/menu` (Sports Menu), `/contact` (Contact). Browser back/forward and navbar active states work with React Router.
-- **useState:** favorite sport on `App.js`, menu search/filter, contact form, mobile navigation.
-- **useContext:** shared favorite in `src/context/SportContext.js` with `SportContext.Provider` in App.js, used in Home and Menu.
-- **useEffect:** persist the favorite sport in localStorage and update page title/scroll when route changes.
-- **useMemo:** original Menu schedule filtering retained as a previous project feature. This is not necessary to understand the professor's hook scope.
-- **JS extension:** every React component uses `.js`. `vite.config.js` transforms JSX syntax inside `.js`.
-- Original logo, page content, CSS styling and contact form retained.
+- Node.js 18.20 or newer
+- npm
 
-## Test checklist
+## Install and run locally
 
-1. Select Basketball on Home, go to Sports Menu, confirm the favorite says Basketball.
-2. Open Sports Menu; the schedule should already show only Basketball. Select **All sports** in the same filter dropdown to see the full schedule. Choose Basketball again to filter it.
-3. Refresh the browser, return Home: Basketball should still be selected.
-4. Click About and Contact. Confirm both work, including the form's messages.
-5. Press Back and Forward in the browser; the correct route should display.
-6. Stop Vite with Ctrl+C and run `npm.cmd run build` to check for compilation errors.
+From the folder containing `package.json`:
 
-## Files to submit
+```powershell
+npm.cmd install
+npm.cmd run dev
+```
 
-Submit the extracted source project or this ZIP, according to your professor's instructions.
-Do not include `node_modules` or `dist` unless your professor asks.
+Open the local address printed by Webpack (normally
+`http://127.0.0.1:3000`). On Windows, `npm.cmd` avoids PowerShell execution
+policy restrictions that can block `npm`.
 
-> Note: This ZIP was reconstructed from the Sports Hub project archive available in your ChatGPT files. Any local edits you made after that archived copy (beyond the favorite-sport context described in chat) are not included.
+The development server supports direct visits and refreshes on all four
+client-side routes.
 
-### Favorite schedule filter
+## Production build
 
-When you open the Menu, the Upcoming Matches schedule automatically shows your saved favorite sport from Home. Use the single sport filter dropdown to choose **All sports**, **Football**, **Basketball** or **Tennis**. There is no separate favorite button; the dropdown starts on your saved favorite when Menu opens. Changing the sport also clears the search so the schedule is visible.
+```powershell
+npm.cmd run build
+```
+
+Webpack writes the production site to `dist/`. Deploy the contents of that
+directory as a static website; the Vercel configuration in this repository
+rewrites client-side routes to `index.html`.
+
+## Vercel deployment
+
+1. Push this repository to GitHub and import it into Vercel.
+2. Set **Framework Preset** to **Other**.
+3. Set **Build Command** to `npm run build`.
+4. Set **Output Directory** to `dist`.
+5. Leave the install command at `npm install`; no environment variables are
+   required.
+6. Deploy. The included `vercel.json` sends application routes to the React
+   entry document so direct URLs and refreshes work.
+
+No live deployment link is available yet.
+
+## Screenshots
+
+Add current screenshots of the Home, About, Sports Menu and Contact pages here
+before submission.
+
+## Credits
+
+- Sports highlight photographs are loaded from Unsplash image URLs referenced
+  in `src/pages/Home.js`; the original project did not include photographer
+  attribution.
+- The ATHLYX logo and favicon are provided as `src/assets/athlyx-icon.png`.
+  The original asset bundle did not include separate source attribution.
+- Featured football and basketball team logos and tennis player headshots use
+  ESPN CDN image URLs; initials are shown if an image cannot be loaded.
+- Match entries and linked official schedule pages are listed in
+  `src/pages/Menu.js`.
+
+## Contribution statement
+
+Add the student's name and confirm individual/group contribution details here
+before submission.
+
+## Course requirement to resolve
+
+The current application contains the four pages listed above. The assignment's
+five-page requirement remains unresolved; a fifth page has intentionally not
+been added pending course guidance.
+
+## Repository
+
+[Husseinchkeir/sport-hub-new](https://github.com/Husseinchkeir/sport-hub-new)

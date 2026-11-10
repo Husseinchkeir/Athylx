@@ -97,7 +97,7 @@ const App = () => {
   // UPDATE BROWSER TITLE AND SCROLL
   useEffect(() => {
     document.title =
-      `Sports Hub | ${pageTitles[location.pathname] || 'Home'}`;
+      `ATHLYX | ${pageTitles[location.pathname] || 'Home'}`;
 
     window.scrollTo(0, 0);
   }, [location.pathname]);

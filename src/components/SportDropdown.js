@@ -4,7 +4,9 @@ import { useState } from 'react';
 const SportDropdown = ({
   value,
   onChange,
-  includeAll = false
+  includeAll = false,
+  includeOther = false,
+  ariaLabel
 }) => {
 
   const [open, setOpen] = useState(false);
@@ -15,9 +17,11 @@ const SportDropdown = ({
     { name: 'Tennis', icon: '🎾' }
   ];
 
-  const options = includeAll
-    ? [{ name: 'All', icon: '🏟️' }, ...sports]
-    : sports;
+  const options = [
+    ...(includeAll ? [{ name: 'All', icon: '🏟️' }] : []),
+    ...sports,
+    ...(includeOther ? [{ name: 'Other', icon: '➕' }] : [])
+  ];
 
   const handleSelect = (sport) => {
     onChange(sport);
@@ -44,6 +48,7 @@ const SportDropdown = ({
         className={`sport-dropdown__trigger ${open ? 'is-open' : ''}`}
         onClick={() => setOpen(!open)}
         aria-expanded={open}
+        aria-label={ariaLabel}
       >
         <span className="sport-dropdown__current">
 
