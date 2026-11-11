@@ -1,6 +1,6 @@
 
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import SportContext from '../context/SportContext.js';
 import AuthPanel from '../components/AuthPanel.js';
@@ -47,19 +47,10 @@ const Home = () => {
     setDemoUser
   } = useContext(SportContext);
 
-  const navigate = useNavigate();
-
   // FAVORITE SPORT ICON
   const sportIcon =
     favorite === 'Football' ? '⚽' :
     favorite === 'Basketball' ? '🏀' : '🎾';
-
-  // Open the schedule with a temporary sport filter.
-  const handleExplore = (sport) => {
-    navigate('/menu', {
-      state: { sportFilter: sport }
-    });
-  };
 
   return (
     <main className="page">
@@ -95,13 +86,12 @@ const Home = () => {
 
           <div className="hero-actions">
 
-            <button
+            <Link
               className="btn-secondary"
-              type="button"
-              onClick={() => navigate('/about')}
+              to="/about"
             >
               Discover ATHLYX
-            </button>
+            </Link>
 
           </div>
 
@@ -224,10 +214,9 @@ const Home = () => {
                   <p>{item.text}</p>
 
                   {/* WORKING EXPLORE BUTTON */}
-                  <button
-                    type="button"
+                  <Link
                     className="highlight-card__action"
-                    onClick={() => handleExplore(item.title)}
+                    to={`/menu/${item.title.toLowerCase()}`}
                   >
                     Explore {item.title}
 
@@ -237,7 +226,7 @@ const Home = () => {
                     >
                       →
                     </span>
-                  </button>
+                  </Link>
 
                 </div>
 
@@ -257,7 +246,6 @@ const Home = () => {
         favorite={favorite}
         onEnter={setDemoUser}
         onLeave={() => setDemoUser(null)}
-        onExplore={() => navigate('/menu')}
       />
 
     </main>

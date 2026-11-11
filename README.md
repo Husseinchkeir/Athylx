@@ -1,106 +1,120 @@
 # ATHLYX — Closer to the Game
 
-ATHLYX is a ReactJS sports hub for exploring football, basketball and tennis
-schedules, filtering matches, and saving personal match lists in a demo profile.
-The project retains its dark navy theme, neon-green accents and four-page layout.
+**Sports Discovery and Match Management Platform**
+
+ATHLYX is a sports web application developed using ReactJS for the CSCI426 Advanced Web Programming course at Lebanese International University.
+
+The website allows users to explore football, basketball, and tennis, browse example match schedules, search for matches, filter sports, and save selected matches to their profiles.
+
+ATHLYX focuses on an interactive and responsive user experience with a dark navy interface, neon-green accents, and simple navigation.
+
+## Project Information
+
+- **Student:** Hussein Chouceir
+- **Student ID:** 72330849
+- **University:** Lebanese International University (LIU)
+- **Course:** CSCI426 — Advanced Web Programming
+- **Project:** Phase 1 — Fall 2026
+- **Project Type:** Individual
 
 ## Features
 
-- Four React Router pages: Home, About, Sports Menu and Contact.
-- Separate persistent favorite sport selection and temporary match filters.
-- Match schedule filtering by sport and search by team/player or tournament.
-- Frontend demo registration/sign-in, active profile and sign-out.
-- Per-profile saved matches persisted in browser local storage.
-- Responsive navigation, schedule tables, sports cards and image highlights.
+### Sports Exploration
+Users can browse football, basketball, and tennis through the Home and Sports Menu pages.
 
-> **Authentication limitation:** sign-in is a frontend demonstration, not secure
-> password authentication. Registration stores profile details only; passwords
-> are neither verified nor saved. Do not enter a real password.
->
-> **Schedule limitation:** the displayed schedule entries are static examples,
-> not live or verified fixtures. Contact form submissions are also kept only in
-> the current page session.
+### Favorite Sport
+Users can select a preferred sport from the Home page. The selected preference is stored in the browser.
 
-## Technology
+### Sports Menu
+Users can view example match schedules, search for matches, and filter results by sport.
 
-- React 18 and React DOM
-- React Router 6
-- JavaScript (`.js`) with JSX transformed by Babel
-- Webpack 5 with Babel, CSS and asset loaders
-- Browser local storage for the existing demo profile and saved-match data
+### User Profiles
+The website includes a frontend registration and sign-in demonstration. Users can create a local profile and sign out.
 
-## Requirements
+### Saved Matches
+Signed-in profiles can save and remove selected matches. Saved data is kept in the browser.
 
-- Node.js 18.20 or newer
+### Responsive Design
+The interface includes responsive layouts, navigation, sports cards, and match tables for different screen sizes.
+
+## Website Pages
+
+| Page | Description |
+|---|---|
+| Home | Introduction, sports highlights, favorite sport selection, and account interface |
+| About | Website information and purpose |
+| Sports Menu | Match schedules, search, filtering, and saved matches |
+| Contact | Contact form and information |
+
+## Technologies and Course Concepts
+
+The project applies the following ReactJS and JavaScript concepts covered in the course materials:
+
+| Concept | Purpose in ATHLYX |
+|---|---|
+| ReactJS | Building website components |
+| JavaScript (.js) | Application logic and interactions |
+| React Router | Navigation between pages |
+| Components | Organizing the website into reusable sections |
+| Props | Passing information between components |
+| useState | Managing changing values |
+| useEffect | Handling updates and side effects |
+| useContext | Sharing information between components |
+| React Events | Handling buttons and form interactions |
+| CSS | Website styling and responsive layouts |
+
+## Installation
+
+### Requirements
+
+- Node.js
 - npm
 
-## Install and run locally
+### Run Locally
 
-From the folder containing `package.json`:
+Clone the repository:
 
-```powershell
-npm.cmd install
-npm.cmd run dev
+```bash
+git clone https://github.com/Husseinchkeir/sport-hub-new.git
 ```
 
-Open the local address printed by Webpack (normally
-`http://127.0.0.1:3000`). On Windows, `npm.cmd` avoids PowerShell execution
-policy restrictions that can block `npm`.
+Open the project directory:
 
-The development server supports direct visits and refreshes on all four
-client-side routes.
-
-## Production build
-
-```powershell
-npm.cmd run build
+```bash
+cd sport-hub-new
 ```
 
-Webpack writes the production site to `dist/`. Deploy the contents of that
-directory as a static website; the Vercel configuration in this repository
-rewrites client-side routes to `index.html`.
+Install dependencies:
 
-## Vercel deployment
+```bash
+npm install
+```
 
-1. Push this repository to GitHub and import it into Vercel.
-2. Set **Framework Preset** to **Other**.
-3. Set **Build Command** to `npm run build`.
-4. Set **Output Directory** to `dist`.
-5. Leave the install command at `npm install`; no environment variables are
-   required.
-6. Deploy. The included `vercel.json` sends application routes to the React
-   entry document so direct URLs and refreshes work.
+Start the application:
 
-No live deployment link is available yet.
+```bash
+npm run dev
+```
 
-## Screenshots
+The local website address will appear in the terminal.
 
-Add current screenshots of the Home, About, Sports Menu and Contact pages here
-before submission.
+For Windows PowerShell, `npm.cmd` can be used instead of `npm` when script execution is restricted.
 
-## Credits
+### Production Build
 
-- Sports highlight photographs are loaded from Unsplash image URLs referenced
-  in `src/pages/Home.js`; the original project did not include photographer
-  attribution.
-- The ATHLYX logo and favicon are provided as `src/assets/athlyx-icon.png`.
-  The original asset bundle did not include separate source attribution.
-- Featured football and basketball team logos and tennis player headshots use
-  ESPN CDN image URLs; initials are shown if an image cannot be loaded.
-- Match entries and linked official schedule pages are listed in
-  `src/pages/Menu.js`.
+```bash
+npm run build
+```
 
-## Contribution statement
+The generated website files are placed in the `dist` folder.
 
-Add the student's name and confirm individual/group contribution details here
-before submission.
 
-## Course requirement to resolve
 
-The current application contains the four pages listed above. The assignment's
-five-page requirement remains unresolved; a fifth page has intentionally not
-been added pending course guidance.
+## GitHub and Deployment
 
-## Repository
+The source code is maintained using Git and GitHub.
 
-[Husseinchkeir/sport-hub-new](https://github.com/Husseinchkeir/sport-hub-new)
+**Repository:**
+
+https://github.com/Husseinch
+**Live Website:** https://athylx-nu.vercel.app

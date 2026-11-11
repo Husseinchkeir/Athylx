@@ -1,6 +1,5 @@
 
 import { useState, useContext, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import SportContext from '../context/SportContext.js';
 import SportDropdown from '../components/SportDropdown.js';
 
@@ -186,14 +185,12 @@ const matches = [
 ];
 
 // MENU COMPONENT
-const Menu = () => {
+const Menu = ({ initialSport }) => {
 
   // SHARED CONTEXT
   const { favorite, demoUser } = useContext(SportContext);
-  const location = useLocation();
-  const requestedSport = location.state?.sportFilter;
-  const initialSportFilter = validSports.includes(requestedSport)
-    ? requestedSport
+  const initialSportFilter = validSports.includes(initialSport)
+    ? initialSport
     : favorite || 'All';
 
   // SIGN IN STATUS
@@ -251,16 +248,14 @@ const Menu = () => {
 
   }, [savedMatches, storageKey]);
 
-  // Apply Explore filters when navigating to another Menu history entry.
+  // Keep the route's initial selection separate from dropdown changes.
   useEffect(() => {
-    const requested = location.state?.sportFilter;
-
     setSportFilter(
-      validSports.includes(requested)
-        ? requested
+      validSports.includes(initialSport)
+        ? initialSport
         : favorite || 'All'
     );
-  }, [favorite, location.key, location.state?.sportFilter]);
+  }, [favorite, initialSport]);
 
   // SAVE OR REMOVE MATCH
   const toggleSaved = (matchName) => {

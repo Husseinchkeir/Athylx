@@ -845,6 +845,7 @@ tbody tr:last-child td {
 /* Submit button */
 
 .auth-submit {
+  display: block;
   width: 100%;
   margin-top: 25px;
   padding: 15px;
@@ -855,6 +856,9 @@ tbody tr:last-child td {
   font-size: 15px;
   font-weight: 800;
   cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  box-sizing: border-box;
   transition: all 0.25s ease;
 }
 

@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import NavBar from './components/NavBar.js';
 import Footer from './components/Footer.js';
@@ -12,12 +12,13 @@ import Contact from './pages/Contact.js';
 
 import SportContext from './context/SportContext.js';
 
-// PAGE TITLES
-const pageTitles = {
-  '/': 'Home',
-  '/about': 'About',
-  '/menu': 'Sports Menu',
-  '/contact': 'Contact'
+const PageEffects = ({ path, title, children }) => {
+  useEffect(() => {
+    document.title = `ATHLYX | ${title}`;
+    window.scrollTo(0, 0);
+  }, [path, title]);
+
+  return children;
 };
 
 const App = () => {
@@ -63,9 +64,6 @@ const App = () => {
     }
   });
 
-  // CURRENT PAGE
-  const location = useLocation();
-
   // SAVE FAVORITE SPORT
   useEffect(() => {
     try {
@@ -94,14 +92,6 @@ const App = () => {
     }
   }, [demoUser]);
 
-  // UPDATE BROWSER TITLE AND SCROLL
-  useEffect(() => {
-    document.title =
-      `ATHLYX | ${pageTitles[location.pathname] || 'Home'}`;
-
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
-
   return (
 
     <SportContext.Provider
@@ -123,31 +113,83 @@ const App = () => {
 
           <Route
             path="/"
-            element={<Home />}
+            element={
+              <PageEffects path="/" title="Home">
+                <Home />
+              </PageEffects>
+            }
           />
 
           <Route
             path="/about"
-            element={<About />}
+            element={
+              <PageEffects path="/about" title="About">
+                <About />
+              </PageEffects>
+            }
           />
 
           <Route
             path="/menu"
             element={
-              <Menu
-                key={demoUser ? demoUser.email : 'guest'}
-              />
+              <PageEffects path="/menu" title="Sports Menu">
+                <Menu key={demoUser ? demoUser.email : 'guest'} />
+              </PageEffects>
+            }
+          />
+
+          <Route
+            path="/menu/football"
+            element={
+              <PageEffects path="/menu/football" title="Sports Menu">
+                <Menu
+                  initialSport="Football"
+                  key={demoUser ? demoUser.email : 'guest'}
+                />
+              </PageEffects>
+            }
+          />
+
+          <Route
+            path="/menu/basketball"
+            element={
+              <PageEffects path="/menu/basketball" title="Sports Menu">
+                <Menu
+                  initialSport="Basketball"
+                  key={demoUser ? demoUser.email : 'guest'}
+                />
+              </PageEffects>
+            }
+          />
+
+          <Route
+            path="/menu/tennis"
+            element={
+              <PageEffects path="/menu/tennis" title="Sports Menu">
+                <Menu
+                  initialSport="Tennis"
+                  key={demoUser ? demoUser.email : 'guest'}
+                />
+              </PageEffects>
             }
           />
 
           <Route
             path="/contact"
-            element={<Contact />}
+            element={
+              <PageEffects path="/contact" title="Contact">
+                <Contact />
+              </PageEffects>
+            }
           />
 
           <Route
             path="*"
-            element={<Home />}
+            element={
+              <PageEffects path="*" title="Home">
+                <Home />
+              </PageEffects>
+            }
           />
 
         </Routes>

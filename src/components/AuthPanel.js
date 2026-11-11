@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const initialForm = {
   fullname: '',
@@ -12,8 +13,7 @@ const AuthPanel = ({
   demoUser,
   favorite,
   onEnter,
-  onLeave,
-  onExplore
+  onLeave
 }) => {
 
   const [mode, setMode] = useState('signin');
@@ -187,13 +187,12 @@ const AuthPanel = ({
               <strong> {favorite}</strong>
             </p>
 
-            <button
-              type="button"
+            <Link
               className="auth-submit"
-              onClick={onExplore}
+              to="/menu"
             >
               Explore Matches →
-            </button>
+            </Link>
 
             <button
               type="button"
